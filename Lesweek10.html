@@ -146,14 +146,30 @@
         overlay.classList.add('hidden');
     });
 
+    // ✅ ACTIVE LINK (Netlify + GitHub proof)
     const links = document.querySelectorAll('.nav-link');
-    const currentPage = window.location.pathname.split('/').pop();
+    let currentPage = window.location.pathname;
+
+    // trailing slash verwijderen
+    if (currentPage.endsWith('/')) {
+        currentPage = currentPage.slice(0, -1);
+    }
+
+    // bestandsnaam pakken
+    currentPage = currentPage.split('/').pop();
+
+    // fallback voor home
+    if (currentPage === "") {
+        currentPage = "index.html";
+    }
+
     links.forEach(link => {
         if (link.getAttribute('href') === currentPage) {
             link.classList.add('active');
         }
     });
 
+    // image zoom (voor toekomstige afbeeldingen)
     document.querySelectorAll('.zoomable').forEach(img => {
         img.addEventListener('click', () => {
             const overlay = document.createElement('div');
@@ -166,6 +182,7 @@
         });
     });
 </script>
+
 
 </body>
 </html>
